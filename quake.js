@@ -33,18 +33,18 @@
   // minimum magnitude in our data set is 2.5.
   var colors = d3.scale.pow()
     .exponent(3)
-    .domain([2, 4, 6, 8, 10])
+    .domain([1, 10000, 40000, 500000, 4000000])
       .range(['white', 'yellow', 'orange', 'red', 'purple']);
   // Also create a scale for mapping magnitudes to ping angle sizes
   var angles = d3.scale.pow()
     .exponent(3)
-    .domain([2.5, 10])
-    .range([0.5, 15]);
+    .domain([1, 4000000])
+    .range([0.5, 1000000]);
   // And finally, a scale for mapping magnitudes to ping TTLs
   var ttls = d3.scale.pow()
     .exponent(3)
-    .domain([2.5, 10])
-    .range([2000, 5000]);
+    .domain([1, 4000000])
+    .range([2000, 50000]);
 
   // Create a key to show the magnitudes and their colors
   d3.select('#magnitudes').selectAll('li')
@@ -78,7 +78,7 @@
     var lastTick = new Date().getTime();
 
     var updateDate = function() {
-      d3.select('#date').text(moment(currentTime).utc().format("MMM DD YYYY HH:mm UTC"));
+      d3.select('#date').text("YEAR : "+moment(currentTime).utc().format("YYYY"));
     };
 
     // A scale that maps a percentage of playback to a time
@@ -92,7 +92,8 @@
     // 12 minutes of real time maps to the entirety of the
     // timespan covered by the data.
     var realToData = d3.scale.linear()
-      .domain([0, 1000 * 60 * 12])
+      //.domain([0, 1000 * 60 * 12])
+      .domain([0, 1000 * 60 * 1])
       .range([0, end - start]);
 
     var paused = false;
