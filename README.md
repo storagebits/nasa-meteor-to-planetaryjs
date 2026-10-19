@@ -8,14 +8,15 @@ Meteorite landings recorded by NASA from 861 to 2013, replayed year by year on a
 
 `index.html` draws a spinning globe with [Planetary.js](https://github.com/BinaryMuse/planetary.js) and plays back the landings of NASA's *Meteorite Landings* dataset over about a minute, from the year 861 to 2013. Each meteorite pings at its landing site, coloured and sized by its mass (white for a few grams, up to purple for tonnes). A slider shows the current year; drag it to jump through time.
 
-`converter.py` turns the dataset (`nasa-datas.json`, 1,000 records from NASA's open data portal) into the time-sorted list the globe reads (`year_quakes_small.json`, 961 landings with a year, a mass and a location). The playback code is adapted from Planetary.js's earthquake example, hence the file names.
+`converter.py` turns the dataset (`nasa-datas.json`, 1,000 records from NASA's open data portal) into the time-sorted list the globe reads (`year_quakes_small.json`: 961 entries, of which 922 carry a date and a position and are played back). The playback code is adapted from Planetary.js's earthquake example, hence the file names.
 
 ## Status
 
 Hackathon prototype, finished on 4 October 2020 and not developed since. It runs in a current browser.
 
 - Works: the globe, the playback from 861 to 2013, the mass colours and the slider.
-- Rough edges: the page refers to a background image and a stylesheet that are not in the repository, so it shows on a white background and the page title is partly hidden behind the globe; the playback goes quickly through the early centuries, where landings are rare. `converter.py` skips some records it should keep (it removes items from the list it is iterating over).
+- Rough edges: the page refers to a background image and a stylesheet that are not in the repository, so it shows on a white background and the page title is partly hidden behind the globe; the playback goes quickly through the early centuries, where landings are rare. `converter.py` removes items from the list it is iterating over, so it leaves 39 records unconverted in its output (the globe ignores them) and keeps 2 that lack a mass or a location.
+- `index.html` also loads jQuery, a Font Awesome kit, typed.js, Waypoints, Owl Carousel and Google Fonts from CDNs that the page does not use, so it needs network access.
 - Leftovers from the hackathon, not used by the page: `planetaryjs-datas.json` (earthquake data from the original example), `sky.jpg` and the `.BAK` files.
 
 ## Getting started
